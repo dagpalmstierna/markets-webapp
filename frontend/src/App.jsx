@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import MarketsPage   from './pages/MarketsPage.jsx';
 
 // Kör såhär:
 // uvicorn main:app --reload
@@ -24,9 +25,9 @@ function App() {
   return (
     <BrowserRouter>
       <header className="app-header">
-        <h1>My App</h1>
-        <nav className="main-nav">
-          <NavLink to="/"        end>Search</NavLink>
+      <h1><NavLink to="/">TradingView</NavLink></h1>
+      <nav className="main-nav">
+          <NavLink to="/search">Search</NavLink>
           <NavLink to="/portfolio">Portfolio</NavLink>
           <NavLink to="/backtest">Backtest</NavLink>
         </nav>
@@ -34,7 +35,8 @@ function App() {
 
       <main className="app-main">
         <Routes>
-          <Route path="/"        element={<SearchPage />} />
+          <Route path="/"        element={<MarketsPage />} />
+          <Route path="/search"   element={<SearchPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </main>

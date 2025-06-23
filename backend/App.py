@@ -64,7 +64,17 @@ def load_portfolio():
        "portfolio": [stock.to_dict() for stock in portfolio.list_holdings()]
     }
 
-
+@app.get("/markets")
+def get_markets():
+    tickers = ["^GSPC", "^DJI", "^IXIC", "^FTSE", "^GDAXI", "^N225"]
+    data = []
+    for t in tickers:
+        info = yf.Ticker(t).info
+        data.append({
+            "ticker": t,
+            "price": info.get("regularMarketPrice")
+        })
+    return {"markets": data}
 
 
 
