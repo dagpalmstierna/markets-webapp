@@ -19,5 +19,6 @@ class Stock:
             'Current price': self.round(self.current_price),
             'Return': self.round(self.return_)
         }
+    
     def round(self, value):
         return round(value, 2) if isinstance(value, float) else value

@@ -76,6 +76,21 @@ def get_markets():
         })
     return {"markets": data}
 
-
+@app.get("/history/{ticker}")
+def get_history(ticker: str, period: str = "1mo"):
+    period_map = {
+        "1d": "1d",
+        "1w": "7d",
+        "1m": "1mo",
+        "1y": "1y",
+        "5y": "5y",
+    }
+    yf_period = period_map.get(period, "1mo")
+    hist = yf.download(ticker, period=yf_period, interval="1d")
+    history = [
+        {"date": str(idx.date()), "close": row["Close"]}
+        for idx, row in hist.iterrows()
+    ]
+    return {"ticker": ticker, "history": history}
 
     
