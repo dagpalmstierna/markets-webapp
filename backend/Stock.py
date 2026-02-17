@@ -3,6 +3,7 @@ import yfinance as yf
 class Stock:
     def __init__(self, ticker: str):
         data = yf.Ticker(ticker).info
+        self.historical_data = yf.Ticker(ticker).history(period=max)
         self.ticker = ticker
         self.name = data.get('longName', 'Unknown')
         self.quantity = 0
@@ -17,7 +18,8 @@ class Stock:
             'Quantity': self.quantity,
             'Value': self.round(self.value),
             'Current price': self.round(self.current_price),
-            'Return': self.round(self.return_)
+            'Return': self.round(self.return_),
+            'Historical Data': self.historical_data
         }
     
     def round(self, value):

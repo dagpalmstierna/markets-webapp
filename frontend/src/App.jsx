@@ -29,7 +29,7 @@ function App() {
       <nav className="main-nav">
           <NavLink to="/search">Search</NavLink>
           <NavLink to="/portfolio">Portfolio</NavLink>
-          <NavLink to="/backtest">Backtest</NavLink>
+          <NavLink to="/markets">Markets</NavLink>
         </nav>
       </header>
 

@@ -1,8 +1,8 @@
 import csv
 import os 
-from Stock import Stock
+from stock import Stock
 
-CSV_FILE = 'portfolio.csv'
+CSV_FILE = 'data/portfolio.csv'
 
 class Portfolio:
     

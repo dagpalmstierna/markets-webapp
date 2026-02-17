@@ -1,8 +1,10 @@
-from fastapi import FastAPI
+import os
 import yfinance as yf
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from Portfolio import Portfolio
+from fastapi import FastAPI
+
+from fastapi.middleware.cors import CORSMiddleware
+from portfolio import Portfolio
 
 app = FastAPI()
 portfolio = Portfolio()
@@ -14,10 +16,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 class TradeRequest(BaseModel):
     ticker: str
     quantity: int
+
+def load_market_index():
+    df = yf.Ticker("^SPX").history(period=max)
+    return df
 
 def get_current_price(ticker: str):
     stock = yf.Ticker(ticker)
@@ -74,6 +79,7 @@ def get_markets():
             "ticker": t,
             "price": info.get("regularMarketPrice")
         })
+
     return {"markets": data}
 
 @app.get("/history/{ticker}")
@@ -93,4 +99,4 @@ def get_history(ticker: str, period: str = "1mo"):
     ]
     return {"ticker": ticker, "history": history}
 
-    
+
