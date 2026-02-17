@@ -1,4 +1,4 @@
-# Markets Dashboard
+# Markets Dashboard (IN PROGRESS)
 
 A full-stack stock market dashboard with live data from Yahoo Finance. Browse global indices, search any ticker, manage a simulated portfolio, and backtest trading strategies.
 
