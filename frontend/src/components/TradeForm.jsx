@@ -14,12 +14,8 @@ function TradeForm({ onTradeComplete }) {
       });
       const data = await res.json();
       setFeedback(data.message || JSON.stringify(data));
-
-      // nollställ inputar
       setTicker('');
       setQuantity(1);
-
-      // triggera omhämtning i parent
       onTradeComplete && onTradeComplete();
     } catch (err) {
       setFeedback('Error: ' + err.message);
@@ -30,7 +26,7 @@ function TradeForm({ onTradeComplete }) {
     <div className="trade-form">
       <input
         type="text"
-        placeholder="Ticker"
+        placeholder="Ticker (e.g. AAPL)"
         value={ticker}
         onChange={e => setTicker(e.target.value.toUpperCase())}
       />
@@ -41,20 +37,22 @@ function TradeForm({ onTradeComplete }) {
         value={quantity}
         onChange={e => setQuantity(Number(e.target.value))}
       />
-      <button
-        className="buy-button"
-        onClick={() => doTrade('buy')}
-        disabled={!ticker || quantity < 1}
-      >
-        Buy
-      </button>
-      <button
-        className="sell-button"
-        onClick={() => doTrade('sell')}
-        disabled={!ticker || quantity < 1}
-      >
-        Sell
-      </button>
+      <div className="trade-buttons">
+        <button
+          className="buy-button"
+          onClick={() => doTrade('buy')}
+          disabled={!ticker || quantity < 1}
+        >
+          Buy
+        </button>
+        <button
+          className="sell-button"
+          onClick={() => doTrade('sell')}
+          disabled={!ticker || quantity < 1}
+        >
+          Sell
+        </button>
+      </div>
       {feedback && <p className="feedback">{feedback}</p>}
     </div>
   );

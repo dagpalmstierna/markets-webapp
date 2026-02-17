@@ -1,157 +1,245 @@
-/* App.css */
-
-/* HEADER + NAV */
+/* ========= HEADER + NAV ========= */
 .app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  background-color: #282c34;
-  color: white;
+  padding: 0.75rem 2rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-header h1 a {
+  color: var(--text-primary);
 }
 
 .main-nav {
   display: flex;
-  gap: 1rem;
+  gap: 0.25rem;
 }
 
 .main-nav a {
-  color: #61dafb;
+  color: var(--text-secondary);
   text-decoration: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  transition: background-color 150ms;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 150ms;
 }
 
 .main-nav a:hover {
-  background-color: rgba(97, 218, 251, 0.2);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .main-nav a.active {
-  background-color: rgba(97, 218, 251, 0.4);
-  text-decoration: underline;
+  color: var(--accent);
+  background: rgba(59, 130, 246, 0.12);
 }
 
-/* CONTENT WRAPPER */
+/* ========= CONTENT ========= */
 .app-main {
-  height: 100vh;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 }
 
-/* ------------------------------------------------ */
-/* Portföljtabell-styling */
+/* ========= PERIOD BUTTONS ========= */
+.period-buttons {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.period-buttons button {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 150ms;
+}
+
+.period-buttons button:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.period-buttons button.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* ========= MARKETS GRID ========= */
+.markets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+.market-chart {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.market-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.market-chart-ticker {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.market-chart-price {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ========= PORTFOLIO TABLE ========= */
 .portfolio-table-container {
-  width: 100%;
   overflow-x: auto;
-  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
 }
 
 .portfolio-table {
   width: 100%;
-  max-width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
 }
 
 .portfolio-table th,
 .portfolio-table td {
   padding: 0.75rem 1rem;
-  border: 1px solid #ddd;
   text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
 }
 
 .portfolio-table th {
-  background-color: #f5f5f5;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
   font-weight: 600;
-}
-
-.portfolio-table tbody tr:nth-child(even) {
-  background-color: #fafafa;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .portfolio-table tbody tr:hover {
-  background-color: #f0f8ff;
+  background: rgba(255, 255, 255, 0.03);
 }
 
-/* ------------------------------------------------ */
-/* TradeForm */
+.portfolio-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.portfolio-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 3rem 1rem;
+}
+
+/* ========= TRADE FORM ========= */
 .trade-form {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-width: 420px;
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.trade-inputs {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 0.5rem;
+.trade-form input {
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border 150ms;
 }
 
-.trade-buttons {
+.trade-form input:focus {
+  border-color: var(--accent);
+}
+
+.trade-form .trade-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
 }
 
-.ticker-input,
-.quantity-input {
-  padding: 0.5rem;
-  font-size: 1rem;
-  width: 100%;
-}
-
-.trade-buttons button {
-  padding: 0.6rem;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-}
-
 .buy-button {
-  background-color: #4CAF50;
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: white;
+  background: var(--green);
+  transition: opacity 150ms;
+}
+
+.buy-button:hover {
+  opacity: 0.85;
 }
 
 .sell-button {
-  background-color: #F44336;
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: white;
+  background: var(--red);
+  transition: opacity 150ms;
 }
 
-.trade-buttons button:disabled {
-  opacity: 0.6;
+.sell-button:hover {
+  opacity: 0.85;
+}
+
+.trade-form button:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .feedback {
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   text-align: center;
-  margin-top: 0.5rem;
 }
 
-/* ------------------------------------------------ */
-/* SearchBar */
+/* ========= SEARCH BAR ========= */
 .search-bar {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  max-width: 500px;
 }
 
 .search-inputs {
@@ -159,110 +247,99 @@
   gap: 0.5rem;
 }
 
-.search-bar input[type="text"] {
-  padding: 0.5rem;
-  font-size: 1rem;
+.search-inputs input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border 150ms;
 }
 
-.search-bar button {
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
+.search-inputs input[type="text"]:focus {
+  border-color: var(--accent);
+}
+
+.search-inputs button {
+  padding: 0.6rem 1.25rem;
+  background: var(--accent);
   color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background 150ms;
 }
 
-.search-bar button:hover {
-  background-color: #0056b3;
+.search-inputs button:hover {
+  background: var(--accent-hover);
 }
 
 .search-error {
-  color: #c00;
-  font-size: 0.9rem;
+  color: var(--red);
+  font-size: 0.85rem;
 }
 
-.search-result-inline {
+.search-result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.search-result-label {
+.search-result-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.search-result-ticker {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.search-result-price {
+  font-size: 1.1rem;
+  color: var(--green);
   font-weight: 600;
 }
 
-.search-qty {
-  width: 4rem;
-  padding: 0.3rem;
-  font-size: 1rem;
-}
-
-.search-result-inline .buy-button.inline,
-.search-result-inline .sell-button.inline {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-}
-
-.search-result-inline .buy-button.inline {
-  background-color: #4CAF50;
-}
-
-.search-result-inline .sell-button.inline {
-  background-color: #F44336;
-}
-
-.search-feedback {
-  margin-top: 0.5rem;
-  color: #333;
-  font-size: 0.9rem;
-}
-
-
-/* Markets dashboard */
-.markets-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-}
-
-.market-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.market-table th,
-.market-table td {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  text-align: center;
-}
-
-.market-table th {
-  background: #f5f5f5;
-}
-
-.period-buttons {
-  margin-bottom: 1rem;
+.search-trade-row {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.period-buttons button {
-  padding: 0.3rem 0.6rem;
+.search-trade-row input[type="number"] {
+  width: 5rem;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.9rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  outline: none;
 }
 
-.period-buttons .active {
-  background-color: #007bff;
-  color: white;
+.search-trade-row input[type="number"]:focus {
+  border-color: var(--accent);
 }
 
-.market-chart canvas {
-  width: 100% !important;
-  height: 150px !important;
+.search-feedback {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ========= PAGE HEADINGS ========= */
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
 }

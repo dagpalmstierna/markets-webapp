@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
-function PortfolioTable( { refreshCount }) {
+function PortfolioTable({ refreshCount }) {
   const [portfolio, setPortfolio] = useState([]);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
         const res = await fetch('http://localhost:8000/portfolio');
-        const data = await res.json()
-        console.log('portfolio payload:', data)
-        const arr = data.portfolio ?? []
-        setPortfolio(arr)
-      } catch (err) {
+        const data = await res.json();
+        setPortfolio(data.portfolio ?? []);
+      } catch {
         setPortfolio([]);
       }
-    }
+    };
 
     fetchPortfolio();
-    const id = setInterval(fetchPortfolio, 10000); // uppdatera var 10:e sekund
-    return () => clearInterval(id)
+    const id = setInterval(fetchPortfolio, 10000);
+    return () => clearInterval(id);
   }, [refreshCount]);
+
+  if (portfolio.length === 0) {
+    return (
+      <div className="portfolio-table-container">
+        <p className="portfolio-empty">No holdings yet. Use the form above or the Search page to buy stocks.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="portfolio-table-container">
@@ -30,25 +36,29 @@ function PortfolioTable( { refreshCount }) {
             <th>Name</th>
             <th>Quantity</th>
             <th>Value</th>
-            <th>Current Price</th>
+            <th>Price</th>
             <th>Return</th>
           </tr>
         </thead>
         <tbody>
-          {portfolio.map((stock) => (
-            <tr key={stock.ticker}>
-              <td>{stock["Ticker"]}</td>
-              <td>{stock["Name"]}</td>
-              <td>{stock["Quantity"]}</td>
-              <td>{stock["Value"]}</td>
-              <td>{stock["Current price"]}</td>
-              <td>{(stock["Return"] * 100)}%</td>
-            </tr>
-          ))}
+          {portfolio.map((stock) => {
+            const ret = stock["Return"];
+            const retColor = ret > 0 ? 'var(--green)' : ret < 0 ? 'var(--red)' : 'inherit';
+            return (
+              <tr key={stock["Ticker"]}>
+                <td style={{ fontWeight: 600 }}>{stock["Ticker"]}</td>
+                <td>{stock["Name"]}</td>
+                <td>{stock["Quantity"]}</td>
+                <td>${stock["Value"]?.toLocaleString()}</td>
+                <td>${stock["Current price"]?.toLocaleString()}</td>
+                <td style={{ color: retColor }}>{(ret * 100).toFixed(2)}%</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
   );
 }
 
-export default PortfolioTable
+export default PortfolioTable;

@@ -8,10 +8,9 @@ export default function PortfolioPage() {
 
   return (
     <div>
-      <h2>My Portfolio</h2>
+      <h2 className="page-title">My Portfolio</h2>
+      <TradeForm onTradeComplete={handleTrade} />
       <PortfolioTable refreshCount={refreshCount} />
-      {/* <TradeForm onTradeComplete={handleTrade} /> */}
-      
     </div>
   );
 }

@@ -1,42 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import MarketsPage   from './pages/MarketsPage.jsx';
-
-// Kör såhär:
-// uvicorn main:app --reload
-// npm run dev
-import BuyForm from './components/BuyForm.jsx'
-import SellForm from './components/SellForm.jsx'
-import PortfolioTable from './components/PortfolioTable.jsx'
-import TradeForm from './components/TradeForm.jsx'
-import SearchBar from './components/SearchBar.jsx'
-
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
-
+import MarketsPage   from './pages/MarketsPage.jsx';
 import SearchPage    from './pages/SearchPage.jsx';
 import PortfolioPage from './pages/PortfolioPage.jsx';
-// Div = en behållare för innehåll, knappar, text formulär
-// h1 = rubriknivå 1 (högsta nivå)
 
 function App() {
-  // En enkel räknare som vi bump:ar när ett köp är klart
   return (
     <BrowserRouter>
       <header className="app-header">
-      <h1><NavLink to="/">TradingView</NavLink></h1>
-      <nav className="main-nav">
+        <h1><NavLink to="/">Markets</NavLink></h1>
+        <nav className="main-nav">
+          <NavLink to="/" end>Dashboard</NavLink>
           <NavLink to="/search">Search</NavLink>
           <NavLink to="/portfolio">Portfolio</NavLink>
-          <NavLink to="/markets">Markets</NavLink>
         </nav>
       </header>
 
       <main className="app-main">
         <Routes>
-          <Route path="/"        element={<MarketsPage />} />
-          <Route path="/search"   element={<SearchPage />} />
+          <Route path="/"          element={<MarketsPage />} />
+          <Route path="/markets"   element={<MarketsPage />} />
+          <Route path="/search"    element={<SearchPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </main>
